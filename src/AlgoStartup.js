@@ -2,9 +2,9 @@ function AlgoStartup({timestamp, sessionId, algoId, universeName, productId}) {
 
     return (
         <div className="AlgoStartup">
-            <h2>
+            <h1>
                 Starting algo {algoId} ({universeName}) with product {productId}
-            </h2>
+            </h1>
             <p>{timestamp}</p>
         </div>
     );

@@ -1,5 +1,5 @@
 {
-  "name": "qms-log-viewer2",
+  "name": "qms-log-viewer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
