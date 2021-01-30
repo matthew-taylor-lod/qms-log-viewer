@@ -1,30 +1,29 @@
 import './PrePropHistory.scss';
 import React, {useState} from "react";
 
-function PrePropHistory({timestamp, sessionId, xmlData}) {
+function PrePropHistory({data}) {
     const [filterValue, setFilterValue] = useState("");
 
-    const filteredRows = Array.from(xmlData.children).map(node => {
-       const name = node.getAttribute("Name");
-       const value = node.getAttribute("Value");
-       if (name && (name + value).toUpperCase().includes(filterValue.toUpperCase())) {
-           return <Row key={name}
-                       name={name}
-                       value={value}/>
-       }
-       else {
-           return null;
-       }
+
+    const filteredRows = Object.keys(data).map(k => {
+        const v = data[k];
+        if ((k+v).toUpperCase().includes(filterValue.toUpperCase())) {
+            return <Row key={k} name={k} value={v}/>
+        }
+        else {
+            return null;
+        }
     }).filter(e => e);
 
     const rows = (filteredRows.length > 0) ? filteredRows : <EmptyRow/>
 
     const showing = filteredRows.length;
-    const total = xmlData.children.length;
+    const total = Object.keys(data).length;
 
     return (
         <div className="PrePropHistory">
             <h3>PrePop History</h3>
+            <span>Filter by </span>
             <input placeholder="type here to filter table" onKeyUp={e => {setFilterValue(e.target.value)}}/>
             <span>Showing {showing} of {total}</span>
             <table>

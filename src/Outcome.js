@@ -1,34 +1,32 @@
 import "./Outcome.scss";
 
-function Outcome({timestamp, sessionId, jsonData}) {
-    console.log(jsonData);
+function Outcome({data}) {
+    console.log(data);
 
     return (
         <div className="Outcome">
-            <h2>Outcome: {jsonData.diagnosisOutcome.diagnosisStatus}</h2>
-            <p>{timestamp}</p>
+            <h2>Outcome: {data.diagnosisOutcome.diagnosisStatus}</h2>
             <table>
                 <tbody>
                     <tr>
                         <td>Suitable Response</td>
-                        <td>{jsonData.diagnosisOutcome.outcomeScriptData.suitable_response}</td>
+                        <td>{data.diagnosisOutcome.outcomeScriptData.suitable_response}</td>
                     </tr>
                     <tr>
                         <td>Algorithm</td>
-                        <td>{jsonData.algoName}</td>
+                        <td>{data.algoName}</td>
                     </tr>
                     <tr>
                         <td>Product SKU</td>
-                        <td>{jsonData.sku}</td>
+                        <td>{data.sku}</td>
                     </tr>
                     <tr>
                         <td>Patient Id</td>
-                        <td>{jsonData.patientId}</td>
+                        <td>{data.patientId}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     )
 }
 

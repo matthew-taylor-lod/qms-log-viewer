@@ -1,44 +1,26 @@
 .App {
   width: 900px;
   margin: auto;
-  text-align: center;
-
-  h1 {
-    font-size: 20px;
-  }
-
-  h2 {
-    font-size: 17px;
-  }
-
-  font-size: 14px;
 
   table {
-    margin: auto;
-    min-width: 300px;
     border-collapse: collapse;
     border: 2px solid black;
 
+    th {
+      background: #d0d0d0;
+    }
+
     tr:nth-child(odd) {
-      background-color: #f0f0f0;
+      background: #f0f0f0;
     }
 
     tr:nth-child(even) {
-      background-color: #e0e0e0;
+      background: #e0e0e0;
     }
 
     td {
       border: 1px solid silver;
       padding: 2px 5px;
-
-      &:first-child {
-        font-weight: bold;
-        text-align: left;
-      }
-
-      &:last-child {
-        text-align: right;
-      }
     }
   }
 }
