@@ -1,0 +1,17 @@
+.QuestionnaireResponses {
+    .Response {
+        background: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+
+        .question {
+            text-align: left;
+        }
+
+        .answer {
+            font-size: large;
+            font-weight: bold;
+        }
+    }
+}

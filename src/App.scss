@@ -1,21 +1,52 @@
-.App {
-  width: 900px;
-  margin: auto;
+@import "palette";
 
-  table {
+.INCOMPLETE {
+  color: $har-medium-grey;
+}
+.ACCEPTED {
+  color: $har-core-green;
+}
+.REJECTED {
+  color: $har-pain-red;
+}
+.MANUAL {
+  color: $har-winter-blue;
+}
+
+.App {
+  margin-bottom: 30px;
+  div.top {
+    background: $har-medium-green;
+    overflow:auto;
+    box-shadow: 1px 1px 4px 1px black;
+    text-align: center;
+
+    h1 {
+      color: $har-white;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+  }
+
+  div.container {
+    width: 900px;
+    margin: auto;
+  }
+
+  table.striped {
     border-collapse: collapse;
     border: 2px solid black;
 
     th {
-      background: #d0d0d0;
+      background: $har-medium-green-tint;
     }
 
     tr:nth-child(odd) {
-      background: #f0f0f0;
+      background: $har-white;
     }
 
     tr:nth-child(even) {
-      background: #e0e0e0;
+      background: $har-light-grey;
     }
 
     td {

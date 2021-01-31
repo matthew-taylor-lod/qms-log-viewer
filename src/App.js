@@ -1,8 +1,8 @@
 import './App.scss';
 import React, {useEffect, useState} from "react";
-import ParseLog from "./ParseLog";
-import Session from "./Session";
-import SessionList from "./SessionList";
+import ParseLog from "./util/ParseLog";
+import Session from "./session/Session";
+import SessionList from "./session/list/SessionList";
 
 function App() {
     const [data, setData] = useState([]);
@@ -34,11 +34,23 @@ function App() {
         return data.filter(e => e.i === i)[0];
     }
 
-    const inner = (selected) ? <Session session={getSessionByIndex(selected)}/> : <SessionList sessions={data} selected={selected} setSelected={setSelected}/>;
+    const inner = (selected)
+        ? <Session session={getSessionByIndex(selected)}/>
+        : <SessionList sessions={data}
+                       setSelected={setSelected}/>;
 
     return (
         <div className="App">
-            {inner}
+            <div className="top">
+                <div className="container">
+                    <h1 onClick={() => setSelected(0)}>
+                        QMS Log Viewer
+                    </h1>
+                </div>
+            </div>
+            <div className="container">
+                {inner}
+            </div>
         </div>
     );
 }
