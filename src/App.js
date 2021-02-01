@@ -2,7 +2,7 @@ import './App.scss';
 import React, {useEffect, useState} from "react";
 import ParseLog from "./util/ParseLog";
 import Session from "./session/Session";
-import SessionList from "./session/list/SessionList";
+import SessionList from "./sessionlist/SessionList";
 
 function App() {
     const [data, setData] = useState([]);

@@ -1,7 +1,7 @@
 import './KeyValueTable.scss';
 import React, {useState} from "react";
 
-function KeyValueTable({data}) {
+function KeyValueTable({title, data}) {
     const [filterValue, setFilterValue] = useState("");
 
     const filteredRows = Object.keys(data).map(k => {
@@ -21,6 +21,7 @@ function KeyValueTable({data}) {
 
     return (
         <div className="KeyValueTable">
+            <h2>{title}</h2>
             <span>Filter by </span>
             <input placeholder="type here to filter table" onKeyUp={e => {setFilterValue(e.target.value)}}/>
             <span>Showing {showing} of {total}</span>

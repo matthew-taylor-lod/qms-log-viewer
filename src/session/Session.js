@@ -1,6 +1,11 @@
 import './Session.scss';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import React, {useEffect} from "react";
 import QuestionnaireResponses from "./QuestionnaireResponses";
+import SessionSummary from "./SessionSummary";
+import KeyValueTable from "../util/KeyValueTable";
+import OutcomeReasons from "./OutcomeReasons";
 
 function Session({session}) {
     console.log(session);
@@ -10,63 +15,54 @@ function Session({session}) {
         window.scrollTo(0, 0)
     }, [])
 
-    const title = (session.prePropHistory && session.prePropHistory.confInitialProduct)
-        ? session.prePropHistory.confInitialProduct
-        : "Product " + session.sku;
+    const hasQuestionnaireResponses = session.outcome?.questionnaireResponses !== undefined;
+    const hasSilentReasons = session.outcome?.diagnosisOutcome?.reasons !== undefined;
+    const hasBiometrics = session.outcome?.biometrics !== undefined;
 
-    const packSize = (session.prePropHistory && session.prePropHistory.confInitialPackSize)
-        ? " - pack size " + session.prePropHistory.confInitialPackSize
-        : "";
+    const hasPrePropHistory = session.prePropHistory !== undefined;
 
-    const outcome = (session.outcome)
-        ? session.outcome.diagnosisOutcome.diagnosisStatus
-        : "INCOMPLETE";
-
-    let suitableResponse;
-    if (outcome === "REJECTED") {
-        suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ");
-    }
+    const silentReasons = session.outcome?.diagnosisOutcome?.reasons?.silent.map(reason =>
+        <li>{reason.text}</li>);
 
     return (
         <div className="Session">
-            <div className="summary">
-                <div className="title">
-                    <h1>{title + packSize}</h1>
-                </div>
-                <div className="outcomeContainer right">
-                    <p className={"outcome h1 " + outcome}>{outcome}</p>
-                    <p className={"suitableResponse " + outcome}>{suitableResponse}</p>
-                </div>
-            </div>
-            <table className="infoTable">
-                <tbody>
-                    <tr>
-                        <td>Start Time</td>
-                        <td>{session.startTime}</td>
-                    </tr>
-                    {
-                        session.completionTime && <tr>
-                            <td>Completion Time</td>
-                            <td>{session.completionTime}</td>
-                        </tr>
-                    }
-                    <tr>
-                        <td>Patient Universe</td>
-                        <td>{session.patientUniverseName}</td>
-                    </tr>
-                    <tr>
-                        <td>Algo ID</td>
-                        <td>{session.algorithmId}</td>
-                    </tr>
-                    <tr>
-                        <td>SKU</td>
-                        <td>{session.sku}</td>
-                    </tr>
+            <SessionSummary session={session}></SessionSummary>
+            <Tabs>
+                <TabList>
+                    { hasQuestionnaireResponses && <Tab>Questionnaire Responses</Tab>}
+                    { hasSilentReasons && <Tab>Silent Reasons</Tab>}
+                    { hasBiometrics && <Tab>Biometrics</Tab>}
+                    { hasPrePropHistory && <Tab>PrePop History</Tab>}
+                </TabList>
 
-                </tbody>
-            </table>
-
-            <QuestionnaireResponses data={session.outcome?.questionnaireResponses}/>
+                {
+                    hasQuestionnaireResponses &&
+                    <TabPanel>
+                        <QuestionnaireResponses data={session.outcome.questionnaireResponses}/>
+                    </TabPanel>
+                }
+                {
+                    hasSilentReasons &&
+                    <TabPanel>
+                        <h2>Silent Reasons</h2>
+                        <ul>
+                            {silentReasons}
+                        </ul>
+                    </TabPanel>
+                }
+                {
+                    hasBiometrics &&
+                    <TabPanel>
+                        <KeyValueTable title="Biometrics" data={session.outcome.biometrics}/>
+                    </TabPanel>
+                }
+                {
+                    hasPrePropHistory &&
+                    <TabPanel>
+                        <KeyValueTable title="PreProp History" data={session.prePropHistory}/>
+                    </TabPanel>
+                }
+            </Tabs>
         </div>
     )
 }

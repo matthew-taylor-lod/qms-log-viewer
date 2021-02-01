@@ -1,0 +1,34 @@
+.SessionSummary {
+    margin-bottom: 10px;
+    .two-col {
+        width: 100%;
+        display: flex;
+
+        .right-col {
+            flex-grow: 1;
+        }
+    }
+
+    .outcome {
+        display: block;
+        margin-bottom: 0;
+    }
+
+    .suitableResponse {
+        margin-top: 0;
+    }
+
+    .infoTable {
+        margin-left: 0;
+        margin-right: auto;
+
+        td {
+            padding: 0 10px;
+        }
+
+        td:nth-child(even) {
+            text-align: right;
+            font-weight: bold;
+        }
+    }
+}

@@ -23,7 +23,6 @@
             margin-top: 5px;
             margin-left: 50px;
             .question {
-                background: none;
                 border: 0;
                 padding: 0;
             }
@@ -38,12 +37,15 @@
         }
 
         .answer {
-            color: $har-dark-green;
+            color: $har-summer-yellow;
             margin-top: 5px;
             margin-left: 50px;
-            font-size: larger;
+            font-size: x-large;
             font-weight: bold;
             font-style: italic;
+        }
+        .significant {
+            text-decoration: underline;
         }
     }
 }
