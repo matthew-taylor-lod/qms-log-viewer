@@ -36,16 +36,16 @@ function KeyValueTable({title, data}) {
 
 function Row({name, value}) {
     return (
-        <tr>
+        <tr key={name}>
             <td>{name}</td>
-            <td>{value}</td>
+            <td dangerouslySetInnerHTML={{__html: value}}></td>
         </tr>
     )
 }
 
 function EmptyRow() {
     return (
-        <tr>
+        <tr key="whatever">
             <td colSpan={2}></td>
         </tr>
     )

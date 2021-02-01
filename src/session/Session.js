@@ -5,7 +5,6 @@ import React, {useEffect} from "react";
 import QuestionnaireResponses from "./QuestionnaireResponses";
 import SessionSummary from "./SessionSummary";
 import KeyValueTable from "../util/KeyValueTable";
-import OutcomeReasons from "./OutcomeReasons";
 
 function Session({session}) {
     console.log(session);
@@ -17,11 +16,12 @@ function Session({session}) {
 
     const hasQuestionnaireResponses = session.outcome?.questionnaireResponses !== undefined;
     const hasSilentReasons = session.outcome?.diagnosisOutcome?.reasons !== undefined;
+    const hasOutcomeMessages = session.outcome?.diagnosisOutcome?.outcomeMessage !== undefined;
+    const hasOutcomeScriptData = session.outcome?.diagnosisOutcome?.outcomeScriptData !== undefined;
     const hasBiometrics = session.outcome?.biometrics !== undefined;
-
     const hasPrePropHistory = session.prePropHistory !== undefined;
 
-    const silentReasons = session.outcome?.diagnosisOutcome?.reasons?.silent.map(reason =>
+    const silentReasons = session.outcome?.diagnosisOutcome?.reasons?.silent?.map(reason =>
         <li>{reason.text}</li>);
 
     return (
@@ -32,6 +32,8 @@ function Session({session}) {
                     { hasQuestionnaireResponses && <Tab>Questionnaire Responses</Tab>}
                     { hasSilentReasons && <Tab>Silent Reasons</Tab>}
                     { hasBiometrics && <Tab>Biometrics</Tab>}
+                    { hasOutcomeScriptData && <Tab>Script Data</Tab>}
+                    { hasOutcomeMessages && <Tab>Outcome Messages</Tab>}
                     { hasPrePropHistory && <Tab>PrePop History</Tab>}
                 </TabList>
 
@@ -54,6 +56,18 @@ function Session({session}) {
                     hasBiometrics &&
                     <TabPanel>
                         <KeyValueTable title="Biometrics" data={session.outcome.biometrics}/>
+                    </TabPanel>
+                }
+                {
+                    hasOutcomeScriptData &&
+                    <TabPanel>
+                        <KeyValueTable title="Script Data" data={session.outcome?.diagnosisOutcome?.outcomeScriptData}/>
+                    </TabPanel>
+                }
+                {
+                    hasOutcomeMessages &&
+                    <TabPanel>
+                        <KeyValueTable title="Outcome Messages" data={session.outcome?.diagnosisOutcome?.outcomeMessage}/>
                     </TabPanel>
                 }
                 {
