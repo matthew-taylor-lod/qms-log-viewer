@@ -9,10 +9,16 @@ function SessionListItem({session, setSelected}) {
     const outcome = (session.outcome)
         ? session.outcome.diagnosisOutcome.diagnosisStatus
         : "INCOMPLETE";
-    const suitableResponse = (outcome === "REJECTED")
-        ? session.outcome?.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ")
-        : "";
 
+    const changedSku = (session.outcome && Number(session.sku) !== session.outcome.sku);
+
+    let suitableResponse;
+    if (changedSku) {
+        suitableResponse = "Product SKU changed to " + session.outcome.sku;
+    }
+    if (outcome === "REJECTED") {
+        suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ");
+    }
 
     return (
         <tr className="SessionListItem" onClick={() => setSelected(session.i)}>

@@ -3,7 +3,7 @@ import React from "react";
 import SessionListItem from "./SessionListItem";
 
 function SessionList({sessions, setSelected}) {
-    const headers = ["Start time", "Algo", "Product", "SKU", "Outcome", "Suitable Response"];
+    const headers = ["Start time", "Algo", "Initial Product", "SKU", "Outcome", "Notes"];
     const headerRow = headers.map(
         header => <th key={header}>{header}</th>);
 

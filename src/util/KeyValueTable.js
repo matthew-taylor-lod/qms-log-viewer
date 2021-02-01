@@ -46,7 +46,7 @@ function Row({name, value}) {
 function EmptyRow() {
     return (
         <tr key="whatever">
-            <td colSpan={2}></td>
+            <td className="center" colSpan={2}>No matching data</td>
         </tr>
     )
 }

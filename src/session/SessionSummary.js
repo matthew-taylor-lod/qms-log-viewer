@@ -15,7 +15,12 @@ function SessionSummary({session}) {
         ? session.outcome.diagnosisOutcome.diagnosisStatus
         : "INCOMPLETE";
 
+    const changedSku = (session.outcome && Number(session.sku) !== session.outcome.sku);
+
     let suitableResponse;
+    if (changedSku) {
+        suitableResponse = "Product SKU changed to " + session.outcome.sku;
+    }
     if (outcome === "REJECTED") {
         suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ");
     }
@@ -57,6 +62,11 @@ function SessionSummary({session}) {
                                 <td>SKU</td>
                                 <td>{session.sku}</td>
                             </tr>
+                            {changedSku && <tr>
+                                <td>Final SKU</td>
+                                <td>{session.outcome.sku}</td>
+                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

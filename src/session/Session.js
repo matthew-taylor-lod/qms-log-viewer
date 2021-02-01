@@ -22,7 +22,7 @@ function Session({session}) {
     const hasPrePropHistory = session.prePropHistory !== undefined;
 
     const silentReasons = session.outcome?.diagnosisOutcome?.reasons?.silent?.map(reason =>
-        <li>{reason.text}</li>);
+        <li key={reason.code}>{reason.text}</li>);
 
     return (
         <div className="Session">
