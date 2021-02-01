@@ -1,36 +1,51 @@
 @import "palette";
 
-.INCOMPLETE {
-  color: $har-medium-grey;
-}
-.ACCEPTED {
-  color: $har-core-green;
-}
-.REJECTED {
-  color: $har-pain-red;
-}
-.MANUAL {
-  color: $har-winter-blue;
+div.top {
+  background: $har-medium-green;
+  box-shadow: 1px 1px 4px 1px black;
+  text-align: center;
+  cursor: pointer;
+  color: $har-white;
+  font-size: 28px;
+  font-weight: bolder;
+  padding: 5px;
 }
 
 .App {
-  margin-bottom: 30px;
-  div.top {
-    background: $har-medium-green;
-    overflow:auto;
-    box-shadow: 1px 1px 4px 1px black;
-    text-align: center;
-
-    h1 {
-      color: $har-white;
-      cursor: pointer;
-      margin: 10px 0;
-    }
+  min-width: 600px;
+  max-width: 900px;
+  margin: auto;
+  .inner {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
   }
 
-  div.container {
-    width: 900px;
-    margin: auto;
+  h1, .h1 {
+    font-size: 2.0em;
+    font-weight: bold;
+    margin: 0.5em 0;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .INCOMPLETE {
+    color: $har-medium-grey;
+  }
+  .ACCEPTED {
+    color: $har-core-green;
+  }
+  .REJECTED {
+    color: $har-pain-red;
+  }
+  .MANUAL {
+    color: $har-winter-blue;
   }
 
   table.striped {

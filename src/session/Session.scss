@@ -1,14 +1,33 @@
 @import "../palette";
 
 .Session {
-    .outcomeContainer {
+    .summary {
+        width: 100%;
+        display: flex;
 
-        .outcome {
-            font-size: 2em;
-            font-weight: bold;
+        .outcomeContainer {
+            flex-grow: 1;
+            .outcome {
+                display: block;
+                margin-bottom: 0;
+            }
         }
-        .suitableResponse {
-            color: darkgray;
+    }
+    .suitableResponse {
+        margin-top: 0;
+    }
+
+    .infoTable {
+        margin-left: auto;
+        margin-right: 0;
+
+        td {
+            padding: 0 10px;
+        }
+
+        td:nth-child(even) {
+            text-align: right;
+            font-weight: bold;
         }
     }
 }

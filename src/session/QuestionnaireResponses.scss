@@ -1,17 +1,49 @@
+@import "../palette";
+
 .QuestionnaireResponses {
+    ol > li::marker {
+        color: $har-core-green;
+        font-size: 1.5em;
+        margin-right: 20px;
+    }
+
     .Response {
-        background: white;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 10px;
+        margin-bottom: 20px;
 
         .question {
             text-align: left;
+
+            ul, li {
+                list-style: disc;
+                margin: 0;
+            }
+        }
+
+        table {
+            margin-top: 5px;
+            margin-left: 50px;
+            .question {
+                background: none;
+                border: 0;
+                padding: 0;
+            }
+
+            td {
+                padding: 0 10px;
+            }
+
+            td:last-child {
+                text-align: right;
+            }
         }
 
         .answer {
-            font-size: large;
+            color: $har-dark-green;
+            margin-top: 5px;
+            margin-left: 50px;
+            font-size: larger;
             font-weight: bold;
+            font-style: italic;
         }
     }
 }

@@ -40,16 +40,14 @@ function App() {
                        setSelected={setSelected}/>;
 
     return (
-        <div className="App">
-            <div className="top">
-                <div className="container">
-                    <h1 onClick={() => setSelected(0)}>
-                        QMS Log Viewer
-                    </h1>
-                </div>
+        <div>
+            <div className="top" onClick={() => setSelected(0)}>
+                QMS Log Viewer
             </div>
-            <div className="container">
-                {inner}
+            <div className="App">
+                <div className="inner">
+                    {inner}
+                </div>
             </div>
         </div>
     );
