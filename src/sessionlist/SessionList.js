@@ -2,14 +2,13 @@ import "./SessionList.scss";
 import React from "react";
 import SessionListItem from "./SessionListItem";
 
-function SessionList({sessions, setSelected}) {
+function SessionList({sessions}) {
     const headers = ["Start time", "Algo", "Initial Product", "SKU", "Outcome", "Notes"];
     const headerRow = headers.map(
         header => <th key={header}>{header}</th>);
 
     const items = sessions.map(
         session => <SessionListItem key={session.i}
-                                    setSelected={setSelected}
                                     session={session}/>);
 
     if (items.length === 0) {

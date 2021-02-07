@@ -7,12 +7,17 @@ import SessionSummary from "./SessionSummary";
 import KeyValueTable from "../util/KeyValueTable";
 
 function Session({session}) {
-    console.log(session);
 
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
+    if (!session) {
+        return null;
+    }
+
+    console.log(session);
 
     const hasQuestionnaireResponses = session.outcome?.questionnaireResponses !== undefined;
     const hasSilentReasons = session.outcome?.diagnosisOutcome?.reasons !== undefined;

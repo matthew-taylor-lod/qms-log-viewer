@@ -1,16 +1,22 @@
 import './App.scss';
 import React, {useEffect, useState} from "react";
+import {
+    BrowserRouter,
+    Switch,
+    Route
+} from "react-router-dom";
 import ParseLog from "./util/ParseLog";
 import Session from "./session/Session";
 import SessionList from "./sessionlist/SessionList";
+import {useHistory} from "react-router";
 
 function App() {
+    const { push } = useHistory();
     const [data, setData] = useState([]);
 
-    const [selected, setSelected] = useState(null);
-
     const getData = () => {
-        fetch('sample.log', {
+        const path = "/sample.log";
+        fetch(path, {
                 headers: {
                     'pragma': 'no-cache',
                     'cache-control': 'no-cache'
@@ -22,34 +28,37 @@ function App() {
             })
             .then(function (text) {
                 setData(ParseLog(text));
-                //setSelected(1);
             });
     }
 
     useEffect(() => {
-        getData()
+        getData();
+        // eslint-disable-next-line
     }, []);
 
     function getSessionByIndex(i) {
         return data.filter(e => e.i === i)[0];
     }
 
-    const inner = (selected)
-        ? <Session session={getSessionByIndex(selected)}/>
-        : <SessionList sessions={data}
-                       setSelected={setSelected}/>;
-
     return (
-        <div>
-            <div className="top" onClick={() => setSelected(0)}>
+        <>
+            <div className="top" onClick={() => push("/")}>
                 QMS Log Viewer
             </div>
             <div className="App">
                 <div className="inner">
-                    {inner}
+                    <Switch>
+                        <Route exact path="/">
+                            <SessionList sessions={data}/>
+                        </Route>
+                        <Route exact path="/today/:index" render={props => {
+                            const session = getSessionByIndex(Number(props.match.params.index));
+                            return <Session session={session}/>
+                        }} />
+                    </Switch>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

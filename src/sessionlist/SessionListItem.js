@@ -1,7 +1,10 @@
 import "./SessionListItem.scss";
 import React from "react";
+import {useHistory} from "react-router";
 
-function SessionListItem({session, setSelected}) {
+function SessionListItem({session}) {
+    const { push } = useHistory();
+
     const algo = (session.patientUniverseName !== "null")
         ? session.patientUniverseName
         : session.algorithmId;
@@ -21,7 +24,7 @@ function SessionListItem({session, setSelected}) {
     }
 
     return (
-        <tr className="SessionListItem" onClick={() => setSelected(session.i)}>
+        <tr className="SessionListItem" onClick={() => push("/today/" + session.i)}>
             <td>{session.startTime}</td>
             <td>{algo}</td>
             <td>{product}</td>
