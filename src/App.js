@@ -16,19 +16,15 @@ function App() {
     const defaultPath = (process.env.NODE_ENV === 'production') ? "../debug.eh-consultation-questionnaire-web.log" : "sample.log";
 
     const getData = () => {
-        fetch(defaultPath, {
-                headers: {
-                    'pragma': 'no-cache',
-                    'cache-control': 'no-cache'
-                }
-            })
-            .then(function (response) {
-                console.log(response)
-                return response.text();
-            })
-            .then(function (text) {
-                setData(ParseLog(text));
-            });
+
+        function callback () {
+            setData(ParseLog(this.responseText));
+        }
+
+        const request = new XMLHttpRequest();
+        request.addEventListener("load", callback);
+        request.open("GET", defaultPath);
+        request.send();
     }
 
     useEffect(() => {

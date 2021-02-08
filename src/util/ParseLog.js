@@ -19,7 +19,6 @@ function ParseLog(text) {
     const uniqueSessionIds = Array.from(items.reduce((set, item) => set.add(item.sessionId), new Set()));
     const itemsBySession = uniqueSessionIds.map(id => items.filter(item => item.sessionId === id));
 
-
     // this bit is too fiddly to do with functions
     const individualSessions = [];
     let current = [];
