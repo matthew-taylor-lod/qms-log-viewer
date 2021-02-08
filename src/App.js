@@ -11,7 +11,7 @@ import {useHistory} from "react-router";
 
 function App() {
     const { push } = useHistory();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(undefined);
 
     const defaultPath = (process.env.NODE_ENV === 'production') ? "../debug.eh-consultation-questionnaire-web.log" : "sample.log";
 
@@ -44,20 +44,27 @@ function App() {
             </div>
             <div className="App">
                 <div className="inner">
-                    <Switch>
-                        <Route exact path="/" render={props => {
-                            const params = new URLSearchParams(props.location.search);
+                    {data === undefined
+                        ? <div className="loading">
+                            <img src={process.env.PUBLIC_URL + '/loading.gif'} alt="Loading."/>
+                            <p>Loading latest log events.</p>
+                        </div>
+                        : <Switch>
+                            <Route exact path="/" render={props => {
+                                const params = new URLSearchParams(props.location.search);
 
-                            if (params.has("id")) {
-                                const session = getSessionById(params.get("id"));
-                                if (session) {
-                                    return <Session session={session}/>
+                                if (params.has("id")) {
+                                    const session = getSessionById(params.get("id"));
+                                    if (session) {
+                                        return <Session session={session}/>
+                                    }
                                 }
+                                // fallback
+                                return <SessionList sessions={data}/>
+                            }}/>
                             }
-                            // fallback
-                            return <SessionList sessions={data}/>
-                        }} />
-                    </Switch>
+                        </Switch>
+                    }
                 </div>
             </div>
         </>
