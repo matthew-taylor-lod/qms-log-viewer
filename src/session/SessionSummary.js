@@ -22,7 +22,7 @@ function SessionSummary({session}) {
         suitableResponse = "Product SKU changed to " + session.outcome.sku;
     }
     if (outcome === "REJECTED") {
-        suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ");
+        suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replace(/_/g, " ");
     }
 
     const patientId = session.outcome?.patientId;
