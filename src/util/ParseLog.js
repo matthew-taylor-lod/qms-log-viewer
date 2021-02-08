@@ -38,14 +38,14 @@ function ParseLog(text) {
     });
 
     // combine the pieces
-    const output = individualSessions.reverse().map((items, i) => {
+    const output = individualSessions.map((items, i) => {
         const algoStartup = items[0];
         const prePropHistory = (items.length >= 2) ? items[1] : null;
         const outcome = (items.length >= 3) ? items[2] : null;
 
         const session = {};
 
-        session.i = i+1;
+        session.i = i + 1;
         session.sessionId = algoStartup.sessionId;
         session.startTime = algoStartup.timestamp;
         session.completionTime = outcome?.timestamp;
@@ -56,10 +56,9 @@ function ParseLog(text) {
         session.outcome = outcome?.data;
 
         return session;
-
     });
 
-    return output.filter(e => e);
+    return output.filter(e => e).reverse();
 }
 
 function AlgoStartupLine(line) {

@@ -5,9 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
+const basename = (process.env.NODE_ENV === 'production') ? "/logs/eh-consultation-questionnaire-web/qms-log-viewer" : ""
+console.log(basename);
+
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
           <App />
       </BrowserRouter>
   </React.StrictMode>,

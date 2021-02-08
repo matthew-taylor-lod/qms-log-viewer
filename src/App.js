@@ -1,7 +1,6 @@
 import './App.scss';
 import React, {useEffect, useState} from "react";
 import {
-    BrowserRouter,
     Switch,
     Route
 } from "react-router-dom";
@@ -14,9 +13,10 @@ function App() {
     const { push } = useHistory();
     const [data, setData] = useState([]);
 
+    const defaultPath = (process.env.NODE_ENV === 'production') ? "../debug.eh-consultation-questionnaire-web.log" : "sample.log";
+
     const getData = () => {
-        const path = "/sample.log";
-        fetch(path, {
+        fetch(defaultPath, {
                 headers: {
                     'pragma': 'no-cache',
                     'cache-control': 'no-cache'
@@ -36,7 +36,8 @@ function App() {
         // eslint-disable-next-line
     }, []);
 
-    function getSessionByIndex(i) {
+    function getSessionById(id) {
+        const i = Number(id);
         return data.filter(e => e.i === i)[0];
     }
 
@@ -48,12 +49,17 @@ function App() {
             <div className="App">
                 <div className="inner">
                     <Switch>
-                        <Route exact path="/">
-                            <SessionList sessions={data}/>
-                        </Route>
-                        <Route exact path="/today/:index" render={props => {
-                            const session = getSessionByIndex(Number(props.match.params.index));
-                            return <Session session={session}/>
+                        <Route exact path="/" render={props => {
+                            const params = new URLSearchParams(props.location.search);
+
+                            if (params.has("id")) {
+                                const session = getSessionById(params.get("id"));
+                                if (session) {
+                                    return <Session session={session}/>
+                                }
+                            }
+                            // fallback
+                            return <SessionList sessions={data}/>
                         }} />
                     </Switch>
                 </div>

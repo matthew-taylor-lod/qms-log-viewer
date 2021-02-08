@@ -24,7 +24,7 @@ function SessionListItem({session}) {
     }
 
     return (
-        <tr className="SessionListItem" onClick={() => push("/today/" + session.i)}>
+        <tr className="SessionListItem" onClick={() => push("/?id=" + session.i)}>
             <td>{session.startTime}</td>
             <td>{algo}</td>
             <td>{product}</td>
