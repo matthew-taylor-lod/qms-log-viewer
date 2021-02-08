@@ -25,6 +25,9 @@ function SessionSummary({session}) {
         suitableResponse = session.outcome.diagnosisOutcome.outcomeScriptData.suitable_response.replaceAll("_", " ");
     }
 
+    const patientId = session.outcome?.patientId;
+    const traversalId = session.outcome?.traversalId;
+    
     return (
         <div className="SessionSummary">
             <div className="two-col">
@@ -65,6 +68,16 @@ function SessionSummary({session}) {
                             {changedSku && <tr>
                                 <td>Final SKU</td>
                                 <td>{session.outcome.sku}</td>
+                            </tr>
+                            }
+                            {patientId && <tr>
+                                <td>Patient Id</td>
+                                <td>{patientId}</td>
+                            </tr>
+                            }
+                            {traversalId && <tr>
+                                <td>Traversal Id</td>
+                                <td className="traversalId">{traversalId}</td>
                             </tr>
                             }
                         </tbody>
