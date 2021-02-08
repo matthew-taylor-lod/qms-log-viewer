@@ -57,7 +57,7 @@ function ParseLog(text) {
         return session;
     });
 
-    return output.filter(e => e).reverse();
+    return output.filter(e => e).sort((a, b) => a.startTime.localeCompare(b.startTime)).reverse();
 }
 
 function AlgoStartupLine(line) {
