@@ -5,10 +5,12 @@ import {useHistory} from "react-router";
 function SessionListItem({session}) {
     const { push } = useHistory();
 
-    const algo = (session.patientUniverseName !== "null")
+    const algo = (session.patientUniverseName !== "")
         ? session.patientUniverseName
         : session.algorithmId;
-    const product = session.prePropHistory?.confInitialProduct;
+    const product = (session.prePropHistory?.confInitialProduct)
+        ? session.prePropHistory.confInitialProduct
+        : "Product " + session.sku;
     const outcome = (session.outcome)
         ? session.outcome.diagnosisOutcome.diagnosisStatus
         : "INCOMPLETE";
