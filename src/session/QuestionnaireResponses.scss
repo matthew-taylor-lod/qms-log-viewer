@@ -1,6 +1,15 @@
 @import "../palette";
 
 .QuestionnaireResponses {
+
+    .questionTooltip {
+        color: $har-core-green;
+    }
+
+    .answerTooltip {
+        color: $har-summer-yellow;
+    }
+
     ol > li::marker {
         color: $har-core-green;
         font-size: 1.5em;
@@ -36,6 +45,11 @@
             }
         }
 
+        .questionId {
+            text-align: right;
+            color: $har-medium-grey;
+        }
+
         .answer {
             color: $har-summer-yellow;
             margin-top: 5px;
@@ -44,6 +58,7 @@
             font-weight: bold;
             font-style: italic;
         }
+
         .significant {
             text-decoration: underline;
         }
