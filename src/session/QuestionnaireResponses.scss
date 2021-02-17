@@ -2,22 +2,29 @@
 
 .QuestionnaireResponses {
 
-    .questionTooltip {
+    .number {
         color: $har-core-green;
+        font-size: 2.0em;
+        text-align: center;
+        margin-bottom: 10px;
     }
 
-    .answerTooltip {
-        color: $har-summer-yellow;
-    }
-
-    ol > li::marker {
-        color: $har-core-green;
-        font-size: 1.5em;
-        margin-right: 20px;
+    .responses {
+        display: table-row;
     }
 
     .Response {
-        margin-bottom: 20px;
+        display: table-row;
+
+        .cell {
+            display: table-cell;
+            padding-bottom: 20px;
+
+            &:first-of-type {
+                text-align: center;
+                padding-right: 20px;
+            }
+        }
 
         .question {
             text-align: left;
@@ -30,24 +37,27 @@
 
         table {
             margin-top: 5px;
-            margin-left: 50px;
             .question {
                 border: 0;
                 padding: 0;
             }
 
-            td {
-                padding: 0 10px;
+            tr {
+                td {
+                    padding: 10px;
+                }
+
+                td:first-child {
+                    padding-left: 0;
+                }
+                td:last-child {
+                    padding-right: 0;
+                }
             }
 
             td:last-child {
                 text-align: right;
             }
-        }
-
-        .questionId {
-            text-align: right;
-            color: $har-medium-grey;
         }
 
         .answer {
@@ -61,6 +71,22 @@
 
         .significant {
             text-decoration: underline;
+        }
+
+        .questionId {
+            float: left;
+            color: $har-medium-grey;
+            font-size: 10px;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .answerId {
+            color: $har-medium-grey;
+            font-size: 10px;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none !important;
         }
     }
 }
